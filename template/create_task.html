@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .success-message {
+            color: #4caf50;
+            margin-top: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Task</h1>
+        {% if success_message %}
+            <p class="success-message">{{ success_message }}</p>
+        {% endif %}
+        <form action="/add_task" method="post">
+            <label for="userProject">Select Project:</label>
+            <select id="userProject" name="user_project_id" required>
+                {% for project in user_projects %}
+                    <option value="{{ project[0] }}">{{ project[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="taskName">Task Name:</label>
+            <input type="text" id="taskName" name="task_name" required>
+
+            <button type="submit">Create Task</button>
+
+            <a href="/get_data" >
+                <button type="button">Get data</button>
+            </a>
+        </form>
+    </div>
+</body>
+</html>
